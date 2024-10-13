@@ -64,7 +64,7 @@
                     const ipm = apm/quantityProduced*amountIngredient;
                     const inputBelt = ceil1dec(ipm/beltSpeed);
                     document.getElementById("extra-result").innerHTML = ipm+" determined ingredient per minute";
-                    document.getElementById("extra-result").innerHTML = ceil1dec(apm/beltSpeed)+" input belts for the determined ingredient";
+                    document.getElementById("extra-belt-result").innerHTML = ceil1dec(apm/beltSpeed)+" input belts for the determined ingredient";
                 }
             }
             function ceil1dec(number) {
