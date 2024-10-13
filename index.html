@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <title>Factorio Assembler Calculator</title>
+    </head>
+    <body>
+        <div style="display: flex; width: 100%; gap:5em">
+            <div>
+                <span>Amount per minute desired</span><br>
+                <input id="apm-desired" type="number" value="15">
+
+                <span>Recipe crafting time (seconds)</span><br>
+                <input id="recipe-time" type="number" value="5"><br>
+
+                <span>Quantity produced per cycle</span><br>
+                <input id="quantity-produced" type="number" value="1"><br>
+
+                <span>Machine speed</span><br>
+                <select id="machine-speed">
+                    <option value="0.5">0.5 (Assembling Machine 1)</option>
+                    <option value="0.75">0.75 (Assembling Machine 2)</option>
+                    <option value="1.25">1.25 (Assembling Machine 3)</option>
+                </select><br>
+
+                <span>Belt tier (input and output)</span><br>
+                <select id="belt-speed">
+                    <option value="900">900/m (Transport belt)</option>
+                    <option value="1800">1800/m (Fast transport belt)</option>
+                    <option value="2700">2700/m (Express transport belt)</option>
+                </select><br>
+
+                <span>(Optional) Amount of a determined ingredient required per cycle</span><br>
+                <input id="amount-ingredient"><br>
+            </div>
+            <div>
+                <br><button onclick="calculate()">Calculate</button>
+                <h2 id="result" style="margin-top: 5em;"></h2>
+                <h2 id="belt-result"></h2>
+                <h2 id="extra-result"></h2>
+                <h2 id="extra-belt-result"></h2>
+            </div>
+        </div>
+
+        <script>
+            function calculate() {
+                const apm = document.getElementById("apm-desired").value;
+                const recipeTime = document.getElementById("recipe-time").value;
+                const quantityProduced = document.getElementById("quantity-produced").value;
+                const machineSpeed = document.getElementById("machine-speed").value;
+                const amountIngredient = document.getElementById("amount-ingredient").value;
+                const beltSpeed = document.getElementById("belt-speed").value;
+
+                const  machinesRequired = apm/(((machineSpeed*quantityProduced)/recipeTime)*60);
+                document.getElementById("result").innerHTML = machinesRequired+" machines";
+                document.getElementById("belt-result").innerHTML = ceil1dec(apm/beltSpeed)+" belts for output";
+
+                if (amountIngredient=="" || amountIngredient==null) {  
+                    document.getElementById("extra-result").innerHTML = "";
+                    document.getElementById("extra-belt-result").innerHTML = "";
+                } else {
+                    const ipm = apm/quantityProduced*amountIngredient;
+                    const inputBelt = ceil1dec(ipm/beltSpeed);
+                    document.getElementById("extra-result").innerHTML = ipm+" determined ingredient per minute";
+                    document.getElementById("extra-result").innerHTML = ceil1dec(apm/beltSpeed)+" input belts for the determined ingredient";
+                }
+            }
+            function ceil1dec(number) {
+                return Math.ceil(number * 10)/10;
+            }
+        </script>
+    </body>
+</html>

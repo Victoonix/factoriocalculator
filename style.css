@@ -1,0 +1,45 @@
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+body {
+    background: linear-gradient( rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75) ), url('factorio-bg.png');
+    background-position:center top;
+}
+span {
+    color: white;
+    font-size: 16px;
+}
+h2 {
+    color: white;
+}
+* {
+    font-family: sans-serif
+}
+input, select {
+    background-color: #222212;
+    border: 2px solid #664634;
+    border-radius: .3em;
+    color: white;
+    height: 2.2em;
+    font-size: 14px;
+    width: 100%;
+    margin-bottom: 1em;
+}
+button {
+    background-color: #dd9900;
+    height: 3em;
+    width: 9em;
+    font-size: 1em;
+    color: white;
+    font-weight: bold;
+    border-radius: .2em;
+}
